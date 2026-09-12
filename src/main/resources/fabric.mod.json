@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "raincraft",
+  "version": "${version}",
+  "name": "Raincraft",
+  "description": "레인월드 스타일 사이클/비/쉘터/카르마 시스템",
+  "authors": ["you"],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/raincraft/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["com.raincraft.RaincraftMod"],
+    "client": ["com.raincraft.client.RaincraftClient"]
+  },
+  "mixins": ["raincraft.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.15.0",
+    "minecraft": "~1.20.1",
+    "java": ">=17",
+    "fabric-api": "*"
+  }
+}
