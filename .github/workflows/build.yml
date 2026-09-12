@@ -2,7 +2,7 @@ name: Build Mod Jar
 
 on:
   push:
-  workflow_dispatch: # Actions 탭에서 수동으로도 실행 가능
+  workflow_dispatch:
 
 jobs:
   build:
@@ -17,18 +17,13 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Gradle Wrapper 생성 (없으면)
-        run: |
-          if [ ! -f "./gradlew" ]; then
-            echo "gradlew 없음 - wrapper 새로 생성"
-            curl -s https://services.gradle.org/distributions/gradle-8.7-bin.zip -o gradle.zip
-            unzip -q gradle.zip
-            ./gradle-8.7/bin/gradle wrapper --gradle-version 8.7
-          fi
-          chmod +x ./gradlew
+      - name: Gradle 설정 (자동 설치+캐싱)
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.7'
 
       - name: 빌드
-        run: ./gradlew build --stacktrace
+        run: gradle build --stacktrace
 
       - name: 결과 jar 업로드
         uses: actions/upload-artifact@v4
